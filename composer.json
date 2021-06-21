@@ -2,6 +2,14 @@
     "name": "tcgdex/sdk",
     "description": "PHP SDK to communicate with the TCGdex API",
     "type": "library",
+    "keywords": [
+        "tcgdex",
+        "pokemon",
+        "trading",
+        "card",
+        "tcg",
+        "sdk"
+    ],
     "license": "MIT",
     "autoload": {
         "psr-4": {
