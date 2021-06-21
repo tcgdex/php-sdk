@@ -1,0 +1,41 @@
+{
+    "name": "tcgdex/sdk",
+    "description": "PHP SDK to communicate with the TCGdex API",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TCGdex\\": "./src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Avior",
+            "email": "github@avior.me"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.3",
+        "psr/http-client": "^1.0",
+        "psr/simple-cache": "^1.0"
+    },
+    "suggest": {
+        "kriswallsmith/buzz": "Good PSR 18 implementation",
+        "nyholm/psr7": "Good PSR17 implementation",
+        "symfony/cache": "Good PSR16 implementation"
+    },
+    "require-dev": {
+        "kriswallsmith/buzz": "^1.2",
+        "symfony/cache": "^5.3",
+        "nyholm/psr7": "^1.4",
+        "squizlabs/php_codesniffer": "^3.6",
+        "phpmd/phpmd": "^2.10",
+        "phpstan/phpstan": "^0.12.90"
+    },
+    "scripts": {
+        "phpcs": "phpcs",
+        "phpmd": "vendor/bin/phpmd src text phpmd",
+        "phpstan": "phpstan analyse src --level=max"
+    }
+}
