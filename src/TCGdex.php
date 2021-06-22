@@ -11,6 +11,10 @@ use Symfony\Component\Cache\Psr16Cache;
 use TCGdex\Model\Card;
 use TCGdex\Model\CardResume;
 use TCGdex\Model\Model;
+use TCGdex\Model\Serie;
+use TCGdex\Model\SerieResume;
+use TCGdex\Model\Set;
+use TCGdex\Model\SetResume;
 use TCGdex\Model\StringEndpoint;
 
 class TCGdex
@@ -107,18 +111,6 @@ class TCGdex
     }
 
     /**
-     * @return string[]|StringEndpoint|null
-     */
-    public function fetchHp(?string $hp = null)
-    {
-        $data = $this->fetch("hp", $hp);
-        if (!is_null($hp)) {
-            return Model::build(new StringEndpoint($this), $data);
-        }
-        return $data;
-    }
-
-    /**
      * Fetch a card by its ID or local id if the set is named
      * @param String $id
      * @param String|null $set
@@ -151,5 +143,166 @@ class TCGdex
             array_push($arr, Model::build(new CardResume($this), $item));
         }
         return $arr;
+    }
+
+    /**
+     * @param string $category
+     * @return StringEndpoint|null
+     */
+    public function fetchCategory(string $category)
+    {
+        $data = $this->fetch("categories", $category);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchCategories()
+    {
+        return $this->fetch("categories");
+    }
+
+    /**
+     * @param string $hp
+     * @return StringEndpoint|null
+     */
+    public function fetchHp(string $hp)
+    {
+        $data = $this->fetch("hp", $hp);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchHps()
+    {
+        return $this->fetch("hp");
+    }
+
+
+    /**
+     * @param string $illustrator
+     * @return StringEndpoint|null
+     */
+    public function fetchIllustrator(string $illustrator)
+    {
+        $data = $this->fetch("illustrators", $illustrator);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchIllustrators()
+    {
+        return $this->fetch("illustrators");
+    }
+
+    /**
+     * @param string $rarity
+     * @return StringEndpoint|null
+     */
+    public function fetchRarity(string $rarity)
+    {
+        $data = $this->fetch("rarities", $rarity);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchRarities()
+    {
+        return $this->fetch("rarities");
+    }
+
+    /**
+     * @param string $retreat
+     * @return StringEndpoint|null
+     */
+    public function fetchRetreat(string $retreat)
+    {
+        $data = $this->fetch("retreats", $retreat);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchRetreats()
+    {
+        return $this->fetch("retreats");
+    }
+
+    /**
+     * @param string $serie
+     * @return Serie|null
+     */
+    public function fetchSerie(string $serie)
+    {
+        $data = $this->fetch("series", $serie);
+        return Model::build(new Serie($this), $data);
+    }
+
+    /**
+     * @return SerieResume[]
+     */
+    public function fetchSeries()
+    {
+        $data = $this->fetch("series");
+        if (is_null($data)) {
+            return null;
+        }
+        $arr = array();
+        foreach ($data as $item) {
+            array_push($arr, Model::build(new SerieResume($this), $item));
+        }
+        return $arr;
+    }
+
+        /**
+     * @param string $set
+     * @return Set|null
+     */
+    public function fetchSet(string $set)
+    {
+        $data = $this->fetch("sets", $set);
+        return Model::build(new Set($this), $data);
+    }
+
+    /**
+     * @return SetResume[]
+     */
+    public function fetchSets()
+    {
+        $data = $this->fetch("sets");
+        if (is_null($data)) {
+            return null;
+        }
+        $arr = array();
+        foreach ($data as $item) {
+            array_push($arr, Model::build(new SetResume($this), $item));
+        }
+        return $arr;
+    }
+
+    /**
+     * @param string $type
+     * @return StringEndpoint|null
+     */
+    public function fetchType(string $type)
+    {
+        $data = $this->fetch("types", $type);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchTypes()
+    {
+        return $this->fetch("types");
     }
 }

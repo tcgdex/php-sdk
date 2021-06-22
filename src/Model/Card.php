@@ -3,6 +3,12 @@
 namespace TCGdex\Model;
 
 use stdClass;
+use TCGdex\Model\SubModel\Variants;
+use TCGdex\Model\SubModel\Legal;
+use TCGdex\Model\SubModel\Ability;
+use TCGdex\Model\SubModel\Attack;
+use TCGdex\Model\SubModel\Item;
+use TCGdex\Model\SubModel\WeakRes;
 
 /**
  *
@@ -15,10 +21,38 @@ class Card extends CardResume
     protected function fill(stdClass $data)
     {
         foreach ($data as $key => $value) {
-            if ($key === 'set') {
-                $this->set = Model::build(new SetResume($this->sdk), $value);
-            } else {
-                $this->{$key} = $value;
+            switch ($key) {
+                case 'set':
+                    $this->{$key} = Model::build(new SetResume($this->sdk), $value);
+                    break;
+                case 'variants':
+                    $this->{$key} = Model::build(new Variants($this->sdk), $value);
+                    break;
+                case 'item':
+                    $this->{$key} = Model::build(new Item($this->sdk), $value);
+                    break;
+                case 'abilities':
+                    $this->{$key} = array_map(function ($item) {
+                        return Model::build(new Ability($this->sdk), $item);
+                    }, $value);
+                    break;
+                case 'attacks':
+                    $this->{$key} = array_map(function ($item) {
+                        return Model::build(new Attack($this->sdk), $item);
+                    }, $value);
+                    break;
+                case 'weaknesses':
+                case 'resistances':
+                    $this->{$key} = array_map(function ($item) {
+                        return Model::build(new WeakRes($this->sdk), $item);
+                    }, $value);
+                    break;
+                case 'legal':
+                    $this->{$key} = Model::build(new Legal($this->sdk), $value);
+                    break;
+                default:
+                    $this->{$key} = $value;
+                    break;
             }
         }
     }
@@ -38,15 +72,18 @@ class Card extends CardResume
      */
     public $category;
 
+    /**
+     * @var Variants
+     */
     public $variants;
 
     /**
-     * @var CardResume
+     * @var SetResume
      */
     public $set;
 
     /**
-     * @var int|null
+     * @var int[]|null
      */
     public $dexId;
 
@@ -76,7 +113,7 @@ class Card extends CardResume
     public $description;
 
     /**
-     * @var string|null
+     * @var string|int|null
      */
     public $level;
 
@@ -90,14 +127,29 @@ class Card extends CardResume
      */
     public $suffix;
 
+    /**
+     * @var Item|null
+     */
     public $item;
 
+    /**
+     * @var Ability[]
+     */
     public $abilities;
 
+    /**
+     * @var Attack[]
+     */
     public $attacks;
 
+    /**
+     * @var WeakRes[]
+     */
     public $weaknesses;
 
+    /**
+     * @var WeakRes[]
+     */
     public $resistances;
 
     /**
@@ -125,6 +177,9 @@ class Card extends CardResume
      */
     public $regulationMark;
 
+    /**
+     * @var Legal
+     */
     public $legal;
 
     public $fetchFullCard = null;
