@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+    backupGlobals="true"
+    backupStaticAttributes="false"
+    bootstrap="vendor/autoload.php"
+    cacheResult="false"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    forceCoversAnnotation="false"
+    processIsolation="false"
+    stopOnError="true"
+    stopOnFailure="false"
+    stopOnIncomplete="false"
+    stopOnSkipped="false"
+    stopOnRisky="false"
+    timeoutForSmallTests="1"
+    timeoutForMediumTests="10"
+    timeoutForLargeTests="60"
+    verbose="false"
+>
+    <coverage>
+        <include>
+            <directory>src</directory>
+        </include>
+        <report>
+            <clover outputFile="tmp/code-coverage.xml" />
+        </report>
+    </coverage>
+    <testsuites>
+        <testsuite name="Tests">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <logging />
+</phpunit>

@@ -16,6 +16,11 @@
             "TCGdex\\": "./src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "__tests__"
+        }
+    },
     "authors": [
         {
             "name": "Avior",
@@ -29,9 +34,9 @@
         "psr/simple-cache": "^1.0"
     },
     "suggest": {
-        "kriswallsmith/buzz": "Good PSR 18 implementation",
+        "symfony/cache": "Good PSR16 implementation",
         "nyholm/psr7": "Good PSR17 implementation",
-        "symfony/cache": "Good PSR16 implementation"
+        "kriswallsmith/buzz": "Good PSR 18 implementation"
     },
     "require-dev": {
         "kriswallsmith/buzz": "^1.2",
@@ -39,11 +44,14 @@
         "nyholm/psr7": "^1.4",
         "squizlabs/php_codesniffer": "^3.6",
         "phpmd/phpmd": "^2.10",
-        "phpstan/phpstan": "^0.12.90"
+        "phpstan/phpstan": "^0.12.90",
+        "phpunit/phpunit": "^9.5",
+        "webclient/fake-http-client": "^1.0"
     },
     "scripts": {
         "phpcs": "phpcs",
         "phpmd": "vendor/bin/phpmd src text phpmd",
-        "phpstan": "phpstan analyse src --level=max"
+        "phpstan": "phpstan analyse src --level=max",
+        "test": "XDEBUG_MODE=coverage phpunit"
     }
 }
