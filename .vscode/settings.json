@@ -1,0 +1,3 @@
+{
+	"phpmd.rules": "${workspaceFolder}/phpmd.xml"
+}

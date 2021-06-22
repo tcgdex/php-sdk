@@ -22,7 +22,10 @@
 	"extensions": [
 		"felixfbecker.php-debug",
 		"bmewburn.vscode-intelephense-client",
-		"editorconfig.editorconfig"
+		"editorconfig.editorconfig",
+		"ikappas.phpcs",
+		"calsmurf2904.vscode-phpstan",
+		"ecodes.vscode-phpmd"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
