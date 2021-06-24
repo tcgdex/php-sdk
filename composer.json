@@ -18,7 +18,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "__tests__"
+            "Tests\\": "./tests/"
         }
     },
     "authors": [
@@ -49,8 +49,9 @@
         "webclient/fake-http-client": "^1.0"
     },
     "scripts": {
-        "phpcs": "phpcs",
-        "phpmd": "vendor/bin/phpmd src text phpmd",
+        "phpcs": "phpcs --help --report=checkstyle",
+        "phpmd": "phpmd src text phpmd",
+        "github:phpmd": "phpmd src github phpmd",
         "phpstan": "phpstan analyse src --level=max",
         "test": "XDEBUG_MODE=coverage phpunit"
     }

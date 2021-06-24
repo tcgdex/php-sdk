@@ -17,6 +17,10 @@ use TCGdex\Model\Set;
 use TCGdex\Model\SetResume;
 use TCGdex\Model\StringEndpoint;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class TCGdex
 {
 

@@ -13,7 +13,8 @@ use TCGdex\Model\SubModel\WeakRes;
 /**
  *
  * Remove PHPMD warning about the number of fields
- * @SuppressWarnings("fields")
+ * @SuppressWarnings(PHPMD.TooManyFields)
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity) Temporary
  */
 class Card extends CardResume
 {

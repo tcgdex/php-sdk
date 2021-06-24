@@ -1,0 +1,33 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Install Composer dependencies
+      uses: "ramsey/composer-install@v1"
+
+    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
+    # Docs: https://getcomposer.org/doc/articles/scripts.md
+
+    - name: Run PHP_CodeSniffer
+      run: composer run-script phpcs
+
+    - name: Run PHP Mess Detector
+      run: composer run-script github:phpmd
+
+    - name: Run PHPstan
+      run: composer run-script phpstan
