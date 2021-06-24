@@ -68,4 +68,22 @@ final class StackTest extends TestCase
             $this->assertNotEmpty($tcgdex->{$item[0]}(...$item[1]));
         }
     }
+
+    public function testFetchFullCardFromResume(): void
+    {
+        TCGdex::$client = null;
+        $tcgdex = new TCGdex("en");
+        $cards = $tcgdex->fetchCards('swsh1');
+        $this->assertNotEmpty($cards);
+        $this->assertNotEmpty($cards[0]->fetchFullCard());
+    }
+
+    public function testFetchFullSerieFromResume(): void
+    {
+        TCGdex::$client = null;
+        $tcgdex = new TCGdex("en");
+        $series = $tcgdex->fetchSeries();
+        $this->assertNotEmpty($series);
+        $this->assertNotEmpty($series[0]->fetchFullSerie());
+    }
 }
