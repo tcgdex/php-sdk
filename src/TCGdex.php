@@ -88,7 +88,7 @@ class TCGdex
             /** @var string */
             $path = str_replace('?', '%3F', $path);
             // $normalized = Normalizer::normalize($path, Normalizer::NFC);
-            $regexd = preg_replace("[\"'\u0300-\u036f]", '', $path);
+            $regexd = preg_replace("[\"'\x{0300}-\x{036f}]", '', $path);
             return urlencode(is_null($regexd) ? $path : $regexd);
         }, $filtered);
         $url = TCGdex::BASE_URI . '/' . $this->lang . '/' . implode('/', $fixedPath);
