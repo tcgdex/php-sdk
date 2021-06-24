@@ -33,7 +33,7 @@ class SetResume extends Model
      */
     public $cardCount;
 
-    protected function fill(stdClass $data)
+    protected function fill(object $data): void
     {
         foreach ($data as $key => $value) {
             if ($key === 'cardCount') {

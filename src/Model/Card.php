@@ -19,7 +19,7 @@ use TCGdex\Model\SubModel\WeakRes;
 class Card extends CardResume
 {
 
-    protected function fill(stdClass $data)
+    protected function fill(object $data): void
     {
         foreach ($data as $key => $value) {
             switch ($key) {
@@ -183,5 +183,8 @@ class Card extends CardResume
      */
     public $legal;
 
+    /**
+     * @var null
+     */
     public $fetchFullCard = null;
 }

@@ -5,15 +5,15 @@
 	<a href="https://packagist.org/packages/tcgdex/sdk">
 		<img src="https://img.shields.io/packagist/dm/tcgdex/sdk?style=flat-square" alt="NPM Downloads">
 	</a>
-	<!--<a href="https://app.codecov.io/gh/tcgdex/javascript-sdk/">
-		<img src="https://img.shields.io/codecov/c/github/tcgdex/javascript-sdk?style=flat-square&token=FR4BI94N4Q" alt="npm version">
-	</a>-->
+	<a href="https://app.codecov.io/gh/tcgdex/javascript-sdk/">
+		<img src="https://img.shields.io/codecov/c/github/tcgdex/php-sdk?style=flat-square&token=MCENGBDCXN" alt="npm version">
+	</a>
 		<a href="https://github.com/tcgdex/php-sdk/blob/master/LICENSE.md">
 		<img src="https://img.shields.io/github/license/tcgdex/php-sdk?style=flat-square" alt="the TCGdex PHP SDK is released under the MIT license." />
 	</a>
-	<!--<a href="https://github.com/tcgdex/javascript-sdk/blob/master/LICENSE.md">
-		<img src="https://img.shields.io/github/workflow/status/tcgdex/php-sdk/Build%20&%20Test?style=flat-square" alt="the TCGdex JAvascript SDK is released under the MIT license." />
-	</a>-->
+	<a href="https://github.com/tcgdex/javascript-sdk/blob/master/LICENSE.md">
+		<img src="https://img.shields.io/github/workflow/status/tcgdex/php-sdk/Build%20&%20Test?style=flat-square" alt="the TCGdex PHP SDK's automated builds." />
+	</a>
 	<a href="https://discord.gg/NehYTAhsZE">
 		<img src="https://img.shields.io/discord/857231041261076491?color=%235865F2&label=Discord&style=flat-square" alt="Discord Link">
 	</a>
@@ -30,11 +30,11 @@ Full API/SDK documentation in progress at https://www.tcgdex.net/docs
 ```bash
 composer require tcgdex/sdk
 # if you have no PSR 16/17/18 implementations add the following packages
+composer require symfony/cache nyholm/psr7 kriswallsmith/buzz
 # they will be automaticly setup for the project
 # symfony/cache      === PSR16
 # nyholm/psr7        === PSR17
 # kriswallsmith/buzz === PSR18
-composer require symfony/cache nyholm/psr7 kriswallsmith/buzz
 ```
 
 ## Usage
@@ -47,6 +47,7 @@ use TCGdex\TCGdex;
 // Is you are using your own PSRs implementations add theses before loading the class
 TCGdex::$cache = /* PSR16 CacheInterface */;
 TCGdex::$requestFactory = /* PSR17 RequestFactoryInterface */;
+TCGdex::$responseFactory = /* PSR17 ResponseFactoryInterface */;
 TCGdex::$client = /* PSR18 ClientInterface */;
 
 // initialize the SDK with the language

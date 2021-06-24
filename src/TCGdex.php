@@ -29,22 +29,34 @@ class TCGdex
     public const BASE_URI = "https://api.tcgdex.net/v2";
 
     /**
-     * @var \Psr\SimpleCache\CacheInterface
+     * @var \Psr\SimpleCache\CacheInterface|null
      */
     public static $cache;
 
     /**
-     * @var \Psr\Http\Message\RequestFactoryInterface
+     * @var \Psr\Http\Message\ResponseFactoryInterface|null
+     */
+    public static $responseFactory;
+
+    /**
+     * @var \Psr\Http\Message\RequestFactoryInterface|null
      */
     public static $requestFactory;
 
     /**
-     * @var \Psr\Http\Client\ClientInterface
+     * @var \Psr\Http\Client\ClientInterface|null
      */
     public static $client;
 
+    /**
+     * @var int
+     */
     public static $ttl = 60 * 1000 * 1000;
 
+    /**
+     * @var string
+     * Possible values: en, fr
+     */
     public $lang = "en";
 
     /**
@@ -57,13 +69,17 @@ class TCGdex
                 // no PSR16 implementation found, try loading the base one
                 TCGdex::$cache = new Psr16Cache(new ArrayAdapter());
             }
+            if (is_null(TCGdex::$responseFactory)) {
+                // no PSR17 implementation found, try loading the base one
+                TCGdex::$responseFactory = new Psr17Factory();
+            }
             if (is_null(TCGdex::$requestFactory)) {
                 // no PSR17 implementation found, try loading the base one
                 TCGdex::$requestFactory = new Psr17Factory();
             }
-            if (is_null(TCGdex::$client)) {
+            if (is_null(TCGdex::$client) && !is_null(TCGdex::$responseFactory)) {
                 // no PSR18 implementation found, try loading the base one
-                TCGdex::$client = new Curl(TCGdex::$requestFactory);
+                TCGdex::$client = new Curl(TCGdex::$responseFactory);
             }
         } catch (exception $e) {
             throw new Exception("something is missing in the setup, can't continue...");
@@ -74,8 +90,8 @@ class TCGdex
     }
 
     /**
-     * @param String|null $endpoint
-     * @return Object|null
+     * @param string|null $endpoint
+     * @return mixed|null
      */
     public function fetch(...$endpoint)
     {
@@ -251,7 +267,7 @@ class TCGdex
     }
 
     /**
-     * @return SerieResume[]
+     * @return SerieResume[]|null
      */
     public function fetchSeries()
     {
@@ -277,7 +293,7 @@ class TCGdex
     }
 
     /**
-     * @return SetResume[]
+     * @return SetResume[]|null
      */
     public function fetchSets()
     {

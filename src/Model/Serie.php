@@ -12,7 +12,7 @@ class Serie extends SerieResume
      */
     public $sets;
 
-    protected function fill(stdClass $data)
+    protected function fill(object $data): void
     {
         foreach ($data as $key => $value) {
             if ($key === 'sets') {
