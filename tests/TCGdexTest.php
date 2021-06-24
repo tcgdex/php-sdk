@@ -51,6 +51,18 @@ final class StackTest extends TestCase
             array('fetchSets', array('swsh')),
             array('fetchSeries', array()),
             array('fetchSerie', array('swsh')),
+            array('fetchType', array('Grass')),
+            array('fetchTypes', array()),
+            array('fetchRetreat', array('1')),
+            array('fetchRetreats', array()),
+            array('fetchRarity', array('Common')),
+            array('fetchRarities', array()),
+            array('fetchIllustrator', array('TOKIYA')),
+            array('fetchIllustrators', array()),
+            array('fetchHp', array('30')),
+            array('fetchHps', array()),
+            array('fetchCategory', array('Pokemon')),
+            array('fetchCategories', array()),
         );
         foreach ($endpoints as $item) {
             $this->assertNotEmpty($tcgdex->{$item[0]}(...$item[1]));
