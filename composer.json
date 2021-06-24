@@ -52,7 +52,7 @@
         "phpcs": "phpcs --help --report=checkstyle",
         "phpmd": "phpmd src text phpmd",
         "github:phpmd": "phpmd src github phpmd",
-        "phpstan": "phpstan analyse src --level=max",
+        "phpstan": "phpstan analyse src --level=6",
         "test": "XDEBUG_MODE=coverage phpunit"
     }
 }

@@ -20,8 +20,16 @@ abstract class Model
         $this->sdk = $sdk;
     }
 
-    public static function build(Model $model, stdClass $data)
+    /**
+     * @param Model $model
+     * @param object|null $data
+     * @return mixed
+     */
+    public static function build($model, $data)
     {
+        if (is_null($data)) {
+            return null;
+        }
         $model->fill($data);
         return $model;
     }
@@ -32,7 +40,7 @@ abstract class Model
      * foreach ($data AS $key => $value) $this->{$key} = $value;
      * ```
      */
-    protected function fill(stdClass $data)
+    protected function fill(object $data): void
     {
         foreach ($data as $key => $value) {
             $this->{$key} = $value;

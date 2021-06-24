@@ -7,7 +7,7 @@ use stdClass;
 class StringEndpoint extends Model
 {
 
-    protected function fill(stdClass $data)
+    protected function fill(object $data): void
     {
         foreach ($data as $key => $value) {
             if ($key === 'cards') {

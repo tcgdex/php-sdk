@@ -51,9 +51,39 @@ final class StackTest extends TestCase
             array('fetchSets', array('swsh')),
             array('fetchSeries', array()),
             array('fetchSerie', array('swsh')),
+            array('fetchType', array('Grass')),
+            array('fetchTypes', array()),
+            array('fetchRetreat', array('1')),
+            array('fetchRetreats', array()),
+            array('fetchRarity', array('Common')),
+            array('fetchRarities', array()),
+            array('fetchIllustrator', array('TOKIYA')),
+            array('fetchIllustrators', array()),
+            array('fetchHp', array('30')),
+            array('fetchHps', array()),
+            array('fetchCategory', array('Pokemon')),
+            array('fetchCategories', array()),
         );
         foreach ($endpoints as $item) {
             $this->assertNotEmpty($tcgdex->{$item[0]}(...$item[1]));
         }
+    }
+
+    public function testFetchFullCardFromResume(): void
+    {
+        TCGdex::$client = null;
+        $tcgdex = new TCGdex("en");
+        $cards = $tcgdex->fetchCards('swsh1');
+        $this->assertNotEmpty($cards);
+        $this->assertNotEmpty($cards[0]->fetchFullCard());
+    }
+
+    public function testFetchFullSerieFromResume(): void
+    {
+        TCGdex::$client = null;
+        $tcgdex = new TCGdex("en");
+        $series = $tcgdex->fetchSeries();
+        $this->assertNotEmpty($series);
+        $this->assertNotEmpty($series[0]->fetchFullSerie());
     }
 }
