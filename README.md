@@ -19,7 +19,7 @@
 	</a>
 </p>
 
-# TCGdex PHP SDK (WIP)
+# TCGdex PHP SDK
 
 This is the SDK used to communicate with the Open source [TCGdex API](https://www.github.com/tcgdex/cards-database) trough PHP
 
