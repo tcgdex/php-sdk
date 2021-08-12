@@ -1,7 +1,7 @@
 <p align="center">
-	<!--<a href="https://packagist.org/packages/tcgdex/sdk">
-		<img src="https://img.shields.io/packagist/v/tcgdex/sdk?include_prereleases&style=flat-square" alt="Packagist Version">
-	</a>-->
+	<a href="https://packagist.org/packages/tcgdex/sdk">
+		<img src="https://img.shields.io/github/v/release/tcgdex/php-sdk?include_prereleases&style=flat-square" alt="Packagist Version">
+	</a>
 	<a href="https://packagist.org/packages/tcgdex/sdk">
 		<img src="https://img.shields.io/packagist/dm/tcgdex/sdk?style=flat-square" alt="NPM Downloads">
 	</a>
@@ -53,6 +53,6 @@ TCGdex::$client = /* PSR18 ClientInterface */;
 // initialize the SDK with the language
 $tcgdex = new TCGdex("en");
 
-// Fetch you cards !
+// Fetch the cards !
 $card = $tcgdex->fetchCard('1', 'Sword & Shield');
 ```

@@ -16,6 +16,11 @@ class SerieResume extends Model
     public $name;
 
     /**
+     * @var string|null
+     */
+    public $logo;
+
+    /**
      * @return Serie
      */
     public function fetchFullSerie()
