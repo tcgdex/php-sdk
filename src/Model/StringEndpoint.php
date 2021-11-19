@@ -2,8 +2,6 @@
 
 namespace TCGdex\Model;
 
-use stdClass;
-
 class StringEndpoint extends Model
 {
 

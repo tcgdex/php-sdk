@@ -4,7 +4,6 @@ namespace TCGdex;
 
 use Buzz\Client\Curl;
 use Exception;
-use Normalizer;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Psr16Cache;
@@ -16,6 +15,7 @@ use TCGdex\Model\SerieResume;
 use TCGdex\Model\Set;
 use TCGdex\Model\SetResume;
 use TCGdex\Model\StringEndpoint;
+use TCGdex\Request;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -95,39 +95,7 @@ class TCGdex
      */
     public function fetch(...$endpoint)
     {
-        // Fix and normalize the path as the compiler does
-        // var_dump($endpoint);
-        $filtered = array_filter($endpoint, function ($path) {
-            return !is_null($path);
-        });
-        $fixedPath = array_map(function ($path) {
-            /** @var string */
-            $path = str_replace('?', '%3F', $path);
-            // $normalized = Normalizer::normalize($path, Normalizer::NFC);
-            $regexd = preg_replace("/[\"'\x{0300}-\x{036f}]/u", '', $path);
-            return urlencode(is_null($regexd) ? $path : $regexd);
-        }, $filtered);
-        $url = TCGdex::BASE_URI . '/' . $this->lang . '/' . implode('/', $fixedPath);
-        var_dump($url);
-        $cacheKey = $this->lang . implode('', $fixedPath);
-        // fetch from the cache the response
-        $response = TCGdex::$cache->get($cacheKey, null);
-        if (is_null($response)) {
-            // REquest remote if there is no hit in the cache
-            $request = TCGdex::$requestFactory->createRequest('GET', $url);
-            $request = $request->withAddedHeader("user-agent", "@tcgdex/php-sdk/" . TCGdex::VERSION);
-            $response = TCGdex::$client->sendRequest($request);
-            if ($response->getStatusCode() !== 200) {
-                return null;
-            }
-            $result = json_decode(
-                $response->getBody()->__toString()
-            );
-            // add the json to the cache
-            TCGdex::$cache->set($cacheKey, $result, TCGdex::$ttl);
-            return $result;
-        }
-        return $response;
+        return Request::fetch(TCGdex::BASE_URI, $this->lang, ...$endpoint);
     }
 
     /**
@@ -324,5 +292,131 @@ class TCGdex
     public function fetchTypes()
     {
         return $this->fetch("types");
+    }
+
+    /**
+     * @param string $dexId
+     * @return StringEndpoint|null
+     */
+    public function fetchDexId(string $dexId)
+    {
+        $data = $this->fetch("dex-ids", $dexId);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchDexIds()
+    {
+        return $this->fetch("dex-ids");
+    }
+
+    /**
+     * @param string $energyType
+     * @return StringEndpoint|null
+     */
+    public function fetchEnergyType(string $energyType)
+    {
+        $data = $this->fetch("energy-types", $energyType);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchEnergyTypes()
+    {
+        return $this->fetch("energy-types");
+    }
+
+    /**
+     * @param string $regulationMark
+     * @return StringEndpoint|null
+     */
+    public function fetchRegulationMark(string $regulationMark)
+    {
+        $data = $this->fetch("regulation-marks", $regulationMark);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchRegulationMarks()
+    {
+        return $this->fetch("regulation-marks");
+    }
+
+    /**
+     * @param string $stage
+     * @return StringEndpoint|null
+     */
+    public function fetchStage(string $stage)
+    {
+        $data = $this->fetch("stages", $stage);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchStages()
+    {
+        return $this->fetch("stages");
+    }
+
+    /**
+     * @param string $suffix
+     * @return StringEndpoint|null
+     */
+    public function fetchSuffix(string $suffix)
+    {
+        $data = $this->fetch("suffixes", $suffix);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchSuffixes()
+    {
+        return $this->fetch("suffixes");
+    }
+
+    /**
+     * @param string $trainerType
+     * @return StringEndpoint|null
+     */
+    public function fetchTrainerType(string $trainerType)
+    {
+        $data = $this->fetch("trainer-types", $trainerType);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchTrainerTypes()
+    {
+        return $this->fetch("trainer-types");
+    }
+
+    /**
+     * @param string $variant
+     * @return StringEndpoint|null
+     */
+    public function fetchVariant(string $variant)
+    {
+        $data = $this->fetch("variants", $variant);
+        return Model::build(new StringEndpoint($this), $data);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function fetchVariants()
+    {
+        return $this->fetch("variants");
     }
 }
