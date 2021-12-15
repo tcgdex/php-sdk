@@ -42,27 +42,45 @@ final class StackTest extends TestCase
         TCGdex::$client = null;
         $tcgdex = new TCGdex("en");
         $endpoints = array(
-            array('fetchCard', array('swsh1-1')),
-            array('fetchCard', array('1', 'swsh1')),
-            array('fetchCards', array('swsh1')),
+            array('fetchCard', array('swsh3-136')),
+            array('fetchCard', array('136', 'swsh3')),
+
+            array('fetchCards', array('swsh3')),
             array('fetchCards', array()),
-            array('fetchSet', array('swsh1')),
-            array('fetchSets', array('swsh1')),
+            array('fetchSet', array('swsh3')),
+            array('fetchSets', array('swsh3')),
             array('fetchSets', array('swsh')),
             array('fetchSeries', array()),
             array('fetchSerie', array('swsh')),
-            array('fetchType', array('Grass')),
+            array('fetchType', array('Colorless')),
+
             array('fetchTypes', array()),
             array('fetchRetreat', array('1')),
             array('fetchRetreats', array()),
-            array('fetchRarity', array('Common')),
+            array('fetchRarity', array('Uncommon')),
             array('fetchRarities', array()),
-            array('fetchIllustrator', array('TOKIYA')),
+            array('fetchIllustrator', array('tetsuya koizumi')),
             array('fetchIllustrators', array()),
-            array('fetchHp', array('30')),
+            array('fetchHp', array('110')),
             array('fetchHps', array()),
             array('fetchCategory', array('Pokemon')),
             array('fetchCategories', array()),
+
+            array('fetchDexId', array('162')),
+            array('fetchDexIds', array()),
+            array('fetchEnergyType', array('Special')),
+            array('fetchEnergyTypes', array()),
+            array('fetchRegulationMark', array('D')),
+            array('fetchRegulationMarks', array()),
+            array('fetchStage', array('Basic')),
+            array('fetchStages', array()),
+
+            array('fetchSuffix', array('EX')),
+            array('fetchSuffixes', array()),
+            array('fetchTrainerType', array('Tool')),
+            array('fetchTrainerTypes', array()),
+            array('fetchVariant', array('holo')),
+            array('fetchVariants', array()),
         );
         foreach ($endpoints as $item) {
             $this->assertNotEmpty($tcgdex->{$item[0]}(...$item[1]));

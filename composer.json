@@ -29,7 +29,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "psr/http-client": "^1.0",
         "psr/simple-cache": "^1.0"
     },
@@ -49,7 +49,7 @@
         "webclient/fake-http-client": "^1.0"
     },
     "scripts": {
-        "phpcs": "phpcs --help --report=checkstyle",
+        "phpcs": "phpcs --no-cache --report-full",
         "phpmd": "phpmd src text phpmd",
         "github:phpmd": "phpmd src github phpmd",
         "phpstan": "phpstan analyse src --level=6",

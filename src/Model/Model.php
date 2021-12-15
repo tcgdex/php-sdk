@@ -2,11 +2,8 @@
 
 namespace TCGdex\Model;
 
-use stdClass;
-
 abstract class Model
 {
-
     /**
      * @var \TCGdex\TCGdex
      */

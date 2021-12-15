@@ -2,11 +2,8 @@
 
 namespace TCGdex\Model;
 
-use stdClass;
-
 class StringEndpoint extends Model
 {
-
     protected function fill(object $data): void
     {
         foreach ($data as $key => $value) {

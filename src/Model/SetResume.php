@@ -3,11 +3,9 @@
 namespace TCGdex\Model;
 
 use TCGdex\Model\SubModel\CardCountResume;
-use stdClass;
 
 class SetResume extends Model
 {
-
     /**
      * @var string
      */
