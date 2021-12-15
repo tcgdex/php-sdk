@@ -46,7 +46,7 @@ class Request
             $request = TCGdex::$requestFactory->createRequest('GET', $url);
 
             // Add header for basic identification
-            $request = $request->withAddedHeader("user-agent", "@tcgdex/php-sdk/" . TCGdex::VERSION);
+            $request = $request->withAddedHeader("user-agent", "@tcgdex/php-sdk/" . TCGdex::getVersion());
 
             // Execute the request
             $response = TCGdex::$client->sendRequest($request);

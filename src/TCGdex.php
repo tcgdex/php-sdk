@@ -16,15 +16,30 @@ use TCGdex\Model\Set;
 use TCGdex\Model\SetResume;
 use TCGdex\Model\StringEndpoint;
 use TCGdex\Request;
+use Composer\InstalledVersions;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class TCGdex
 {
 
-    public const VERSION = "2.0.0";
+    /**
+     * @deprecated use TCGdex::getVersion()
+     */
+    public const VERSION = "2.x.x";
+
+    public static function getVersion()
+    {
+        try {
+            return InstalledVersions::getVersion("tcgdex/sdk");
+        } catch (Exception $e) {
+            return "2.x.x";
+        }
+    }
 
     public const BASE_URI = "https://api.tcgdex.net/v2";
 
