@@ -4,7 +4,6 @@ namespace TCGdex\Model;
 
 abstract class Model
 {
-
     /**
      * @var \TCGdex\TCGdex
      */

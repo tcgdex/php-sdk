@@ -26,12 +26,14 @@ use Composer\InstalledVersions;
  */
 class TCGdex
 {
-
     /**
      * @deprecated use TCGdex::getVersion()
      */
     public const VERSION = "2.x.x";
 
+    /**
+     * @return string
+     */
     public static function getVersion()
     {
         try {

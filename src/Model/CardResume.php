@@ -4,7 +4,6 @@ namespace TCGdex\Model;
 
 class CardResume extends Model
 {
-
     /**
      * @var string
      */

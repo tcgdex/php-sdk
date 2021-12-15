@@ -4,7 +4,6 @@ namespace TCGdex\Model;
 
 class SerieResume extends Model
 {
-
     /**
      * @var string
      */
