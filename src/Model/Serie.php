@@ -4,7 +4,6 @@ namespace TCGdex\Model;
 
 class Serie extends SerieResume
 {
-
     /**
      * @var SetResume[]
      */

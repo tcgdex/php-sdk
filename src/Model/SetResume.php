@@ -6,7 +6,6 @@ use TCGdex\Model\SubModel\CardCountResume;
 
 class SetResume extends Model
 {
-
     /**
      * @var string
      */

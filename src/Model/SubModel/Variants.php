@@ -6,7 +6,6 @@ use TCGdex\Model\Model;
 
 class Variants extends Model
 {
-
     /**
      * @var string|null
      */

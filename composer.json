@@ -49,7 +49,7 @@
         "webclient/fake-http-client": "^1.0"
     },
     "scripts": {
-        "phpcs": "phpcs --help --report=checkstyle",
+        "phpcs": "phpcs --no-cache --report-full",
         "phpmd": "phpmd src text phpmd",
         "github:phpmd": "phpmd src github phpmd",
         "phpstan": "phpstan analyse src --level=6",

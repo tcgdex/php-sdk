@@ -2,7 +2,6 @@
 
 namespace TCGdex\Model;
 
-use stdClass;
 use TCGdex\Model\SubModel\Variants;
 use TCGdex\Model\SubModel\Legal;
 use TCGdex\Model\SubModel\Ability;
@@ -18,7 +17,6 @@ use TCGdex\Model\SubModel\WeakRes;
  */
 class Card extends CardResume
 {
-
     protected function fill(object $data): void
     {
         foreach ($data as $key => $value) {

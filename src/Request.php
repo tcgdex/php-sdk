@@ -7,6 +7,10 @@ namespace TCGdex;
  */
 class Request
 {
+    /**
+     * @param string|null $path
+     * @return mixed|null
+     */
     public static function fetch(...$path)
     {
         // Filter null elements as they break the rest
@@ -41,7 +45,6 @@ class Request
 
         // Request is not cached
         if (is_null($response)) {
-
             // Request remote if there is no hit in the cache
             $request = TCGdex::$requestFactory->createRequest('GET', $url);
 
