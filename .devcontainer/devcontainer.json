@@ -5,8 +5,9 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
+			// Use oldest supported version: https://www.php.net/supported-versions.php
 			// Update VARIANT to pick a PHP version: 8, 8.0, 7, 7.4, 7.3
-			"VARIANT": "7.3",
+			"VARIANT": "7.4",
 			"INSTALL_NODE": "false",
 			"NODE_VERSION": "lts/*"
 		}

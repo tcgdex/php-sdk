@@ -2,8 +2,6 @@
 
 namespace TCGdex\Model;
 
-use stdClass;
-
 abstract class Model
 {
 

@@ -2,3 +2,4 @@
 /.* export-ignore
 /composer.lock export-ignore
 /*.xml export-ignore
+* text=auto eol=lf

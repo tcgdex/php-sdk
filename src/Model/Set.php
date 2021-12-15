@@ -4,7 +4,6 @@ namespace TCGdex\Model;
 
 use TCGdex\Model\SubModel\CardCount;
 use TCGdex\Model\SubModel\Variants;
-use stdClass;
 use TCGdex\Model\SubModel\Legal;
 
 class Set extends SetResume
