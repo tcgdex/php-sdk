@@ -1,4 +1,9 @@
 <p align="center">
+	<a href="https://www.tcgdex.net">
+		<img src="https://www.tcgdex.net/assets/og.png" width="90%" alt="TCGdex Main Image">
+	</a>
+</p>
+<p align="center">
     <a href="https://packagist.org/packages/tcgdex/sdk">
         <img src="https://img.shields.io/github/v/release/tcgdex/php-sdk?include_prereleases&style=flat-square" alt="Packagist Version">
     </a>
@@ -25,7 +30,9 @@ This is the SDK used to communicate with the Open source [TCGdex API](https://ww
 
 Full API/SDK documentation in progress at https://www.tcgdex.net/docs
 
-## Install
+## Getting Started
+
+install the SDK using:
 
 ```bash
 composer require tcgdex/sdk
