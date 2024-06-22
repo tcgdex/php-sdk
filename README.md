@@ -4,31 +4,31 @@
 	</a>
 </p>
 <p align="center">
-    <a href="https://packagist.org/packages/tcgdex/sdk">
-        <img src="https://img.shields.io/github/v/release/tcgdex/php-sdk?include_prereleases&style=flat-square" alt="Packagist Version">
-    </a>
-    <a href="https://packagist.org/packages/tcgdex/sdk">
-        <img src="https://img.shields.io/packagist/dm/tcgdex/sdk?style=flat-square" alt="NPM Downloads">
-    </a>
-    <a href="https://app.codecov.io/gh/tcgdex/php-sdk/">
-        <img src="https://img.shields.io/codecov/c/github/tcgdex/php-sdk?style=flat-square&token=MCENGBDCXN" alt="npm version">
-    </a>
-        <a href="https://github.com/tcgdex/php-sdk/blob/master/LICENSE.md">
-        <img src="https://img.shields.io/github/license/tcgdex/php-sdk?style=flat-square" alt="the TCGdex PHP SDK is released under the MIT license." />
-    </a>
-    <a href="https://github.com/tcgdex/php-sdk/actions/workflows/build-test.yml">
-        <img src="https://img.shields.io/github/actions/workflow/status/tcgdex/php-sdk/build-test.yml?style=flat-square" alt="the TCGdex PHP SDK's automated builds." />
-    </a>
-    <a href="https://discord.gg/NehYTAhsZE">
-        <img src="https://img.shields.io/discord/857231041261076491?color=%235865F2&label=Discord&style=flat-square" alt="Discord Link">
-    </a>
+	<a href="https://packagist.org/packages/tcgdex/sdk">
+		<img src="https://img.shields.io/github/v/release/tcgdex/php-sdk?include_prereleases&style=flat-square" alt="Packagist Version">
+	</a>
+	<a href="https://packagist.org/packages/tcgdex/sdk">
+		<img src="https://img.shields.io/packagist/dm/tcgdex/sdk?style=flat-square" alt="NPM Downloads">
+	</a>
+	<a href="https://app.codecov.io/gh/tcgdex/php-sdk/">
+		<img src="https://img.shields.io/codecov/c/github/tcgdex/php-sdk?style=flat-square&token=MCENGBDCXN" alt="npm version">
+	</a>
+		<a href="https://github.com/tcgdex/php-sdk/blob/master/LICENSE.md">
+		<img src="https://img.shields.io/github/license/tcgdex/php-sdk?style=flat-square" alt="the TCGdex PHP SDK is released under the MIT license." />
+	</a>
+	<a href="https://github.com/tcgdex/php-sdk/actions/workflows/build-test.yml">
+		<img src="https://img.shields.io/github/actions/workflow/status/tcgdex/php-sdk/build-test.yml?style=flat-square" alt="the TCGdex PHP SDK's automated builds." />
+	</a>
+	<a href="https://discord.gg/NehYTAhsZE">
+		<img src="https://img.shields.io/discord/857231041261076491?color=%235865F2&label=Discord&style=flat-square" alt="Discord Link">
+	</a>
 </p>
 
 # TCGdex PHP SDK
 
-This is the SDK used to communicate with the Open source [TCGdex API](https://www.github.com/tcgdex/cards-database) trough PHP
+This is the SDK used to communicate with the Open source [TCGdex API](https://www.github.com/tcgdex/cards-database) using PHP
 
-Full API/SDK documentation in progress at https://www.tcgdex.net/docs
+[Full API/SDK documentation in progress here](https://tcgdex.dev/sdks/php?ref=sdk_php_readme)
 
 ## Getting Started
 
@@ -44,9 +44,7 @@ composer require symfony/cache nyholm/psr7 kriswallsmith/buzz
 # kriswallsmith/buzz === PSR18
 ```
 
-## Usage
-
-*[complete documentation link](https://tcgdex.dev/sdks/php?ref=sdk_php_readme)*
+## Quick usage
 
 ```php
 use TCGdex\TCGdex;
