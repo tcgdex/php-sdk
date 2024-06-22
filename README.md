@@ -17,7 +17,7 @@
         <img src="https://img.shields.io/github/license/tcgdex/php-sdk?style=flat-square" alt="the TCGdex PHP SDK is released under the MIT license." />
     </a>
     <a href="https://github.com/tcgdex/php-sdk/actions/workflows/build-test.yml">
-        <img src="https://img.shields.io/github/workflow/status/tcgdex/php-sdk/Build%20&%20Test?style=flat-square" alt="the TCGdex PHP SDK's automated builds." />
+        <img src="https://img.shields.io/github/actions/workflow/status/tcgdex/php-sdk/build-test.yml?style=flat-square" alt="the TCGdex PHP SDK's automated builds." />
     </a>
     <a href="https://discord.gg/NehYTAhsZE">
         <img src="https://img.shields.io/discord/857231041261076491?color=%235865F2&label=Discord&style=flat-square" alt="Discord Link">
@@ -46,7 +46,7 @@ composer require symfony/cache nyholm/psr7 kriswallsmith/buzz
 
 ## Usage
 
-_Note: a complete documentation is in progress_
+*[complete documentation link](https://tcgdex.dev/sdks/php?ref=sdk_php_readme)*
 
 ```php
 use TCGdex\TCGdex;
