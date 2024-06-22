@@ -81,25 +81,21 @@ class TCGdex
      */
     public function __construct($lang = null)
     {
-        try {
-            if (is_null(TCGdex::$cache)) {
-                // no PSR16 implementation found, try loading the base one
-                TCGdex::$cache = new Psr16Cache(new ArrayAdapter());
-            }
-            if (is_null(TCGdex::$responseFactory)) {
-                // no PSR17 implementation found, try loading the base one
-                TCGdex::$responseFactory = new Psr17Factory();
-            }
-            if (is_null(TCGdex::$requestFactory)) {
-                // no PSR17 implementation found, try loading the base one
-                TCGdex::$requestFactory = new Psr17Factory();
-            }
-            if (is_null(TCGdex::$client) && !is_null(TCGdex::$responseFactory)) {
-                // no PSR18 implementation found, try loading the base one
-                TCGdex::$client = new Curl(TCGdex::$responseFactory);
-            }
-        } catch (exception $e) {
-            throw new Exception("something is missing in the setup, can't continue...");
+        if (is_null(TCGdex::$cache)) {
+            // no PSR16 implementation found, try loading the base one
+            TCGdex::$cache = new Psr16Cache(new ArrayAdapter());
+        }
+        if (is_null(TCGdex::$responseFactory)) {
+            // no PSR17 implementation found, try loading the base one
+            TCGdex::$responseFactory = new Psr17Factory();
+        }
+        if (is_null(TCGdex::$requestFactory)) {
+            // no PSR17 implementation found, try loading the base one
+            TCGdex::$requestFactory = new Psr17Factory();
+        }
+        if (is_null(TCGdex::$client) && !is_null(TCGdex::$responseFactory)) {
+            // no PSR18 implementation found, try loading the base one
+            TCGdex::$client = new Curl(TCGdex::$responseFactory);
         }
         if (!is_null($lang)) {
             $this->lang = $lang;

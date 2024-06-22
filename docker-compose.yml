@@ -1,0 +1,9 @@
+
+# docker-compose run --build dev /bin/bash
+services:
+  dev:
+    build: .
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/usr/src/app
