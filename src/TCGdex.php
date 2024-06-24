@@ -284,6 +284,7 @@ class TCGdex
     }
 
     /**
+     * @param string $hp
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->hp->get($hp);` instead.
      */
@@ -303,6 +304,7 @@ class TCGdex
 
 
     /**
+     * @param string $illustrator
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->illustrator->get($illustrator);` instead.
      */
@@ -321,6 +323,7 @@ class TCGdex
     }
 
     /**
+     * @param string $rarity
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->rarity->get($rarity);` instead.
      */
@@ -339,6 +342,7 @@ class TCGdex
     }
 
     /**
+     * @param string $retreat
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->retreat->get($retreat);` instead.
      */
@@ -357,6 +361,8 @@ class TCGdex
     }
 
     /**
+     * @param string $serie
+     * @return Serie|null
      * @deprecated 2.2.0 use `$tcgdex->serie->get($serie);` instead.
      */
     public function fetchSerie(string $serie)
@@ -365,6 +371,7 @@ class TCGdex
     }
 
     /**
+     * @return SerieResume[]|null
      * @deprecated 2.2.0 use `$tcgdex->serie->list();` instead.
      */
     public function fetchSeries()
@@ -372,8 +379,10 @@ class TCGdex
         return $this->serie->list();
     }
 
-        /**
-         * @deprecated 2.2.0 use `$tcgdext->get($set);` instead.
+    /**
+     * @param string $set
+     * @return Set|null
+     * @deprecated 2.2.0 use `$tcgdext->get($set);` instead.
      */
     public function fetchSet(string $set)
     {
@@ -381,6 +390,7 @@ class TCGdex
     }
 
     /**
+     * @return SetResume[]|null
      * @deprecated 2.2.0 use `$tcgdex->set->list();` instead.
      */
     public function fetchSets()
@@ -389,6 +399,7 @@ class TCGdex
     }
 
     /**
+     * @param string $type
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->type->get($type);` instead.
      */
@@ -407,6 +418,7 @@ class TCGdex
     }
 
     /**
+     * @param string $dexId
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->dexId->get($dexId);` instead.
      */
@@ -425,6 +437,7 @@ class TCGdex
     }
 
     /**
+     * @param string $energyType
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->energyType->get($energyType);` instead.
      */
@@ -443,6 +456,7 @@ class TCGdex
     }
 
     /**
+     * @param string $regulationMark
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->regulationMark->get($regulationMark);` instead.
      */
@@ -461,6 +475,7 @@ class TCGdex
     }
 
     /**
+     * @param string $stage
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->stage->get($stage);` instead.
      */
@@ -479,6 +494,7 @@ class TCGdex
     }
 
     /**
+     * @param string $suffix
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->suffix->get($suffix);` instead.
      */
@@ -497,6 +513,7 @@ class TCGdex
     }
 
     /**
+     * @param string $trainerType
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->trainerType->get($trainerType);` instead.
      */
@@ -515,6 +532,7 @@ class TCGdex
     }
 
     /**
+     * @param string $variant
      * @return StringEndpoint|null
      * @deprecated 2.2.0 use `$tcgdex->variant->get($variant);` instead.
      */
