@@ -14,15 +14,15 @@ class Endpoint
 {
     /**
      * @param class-string<Item> $itemModel
-     * @param class-string<List> $listModel
+     * @param class-string<List>|null $listModel
      */
     public function __construct(
         protected readonly TCGdex $tcgdex,
         protected readonly string $itemModel,
         protected readonly string|null $listModel,
         protected readonly string $endpoint
-    )
-    {}
+    ) {
+    }
 
      /**
       * @return Item

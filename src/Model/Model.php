@@ -21,7 +21,7 @@ abstract class Model
      * @template T
      * @param T $model
      * @param object|null $data
-     * @return T
+     * @return T|null
      */
     public static function build($model, $data)
     {

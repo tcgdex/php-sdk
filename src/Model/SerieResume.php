@@ -22,15 +22,15 @@ class SerieResume extends Model
     /**
      * @deprecated 2.2.0 use `toSerie()` instead
      */
-    public function fetchFullSerie()
+    public function fetchFullSerie(): Serie
     {
-        return $this->toSerie($this->id);
+        return $this->toSerie();
     }
 
     /**
      * @return Serie
      */
-    public function toSerie()
+    public function toSerie(): Serie
     {
         return $this->sdk->serie->get($this->id);
     }
