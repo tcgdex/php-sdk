@@ -20,10 +20,18 @@ class SerieResume extends Model
     public $logo;
 
     /**
-     * @return Serie
+     * @deprecated 2.2.0 use `toSerie()` instead
      */
     public function fetchFullSerie()
     {
-        return $this->sdk->fetchSerie($this->id);
+        return $this->toSerie($this->id);
+    }
+
+    /**
+     * @return Serie
+     */
+    public function toSerie()
+    {
+        return $this->sdk->serie->get($this->id);
     }
 }

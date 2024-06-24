@@ -9,25 +9,18 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Psr16Cache;
 use TCGdex\Model\Card;
 use TCGdex\Model\CardResume;
-use TCGdex\Model\Model;
 use TCGdex\Model\Serie;
 use TCGdex\Model\SerieResume;
-use TCGdex\Model\Set;
-use TCGdex\Model\SetResume;
 use TCGdex\Model\StringEndpoint;
 use TCGdex\Request;
 use Composer\InstalledVersions;
+use TCGdex\Endpoints\Endpoint;
+use TCGdex\Endpoints\SetEndpoint;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
- * @SuppressWarnings(PHPMD.TooManyMethods)
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
- */
 class TCGdex
 {
     /**
-     * @deprecated use TCGdex::getVersion()
+     * @deprecated use `TCGdex::getVersion()` instead
      */
     public const VERSION = "2.x.x";
 
@@ -100,7 +93,121 @@ class TCGdex
         if (!is_null($lang)) {
             $this->lang = $lang;
         }
+
+        // Setup the endpoints
+        $this->card = new Endpoint($this, Card::class, CardResume::class, 'cards');
+        $this->variant = new Endpoint($this, StringEndpoint::class, null, 'variants');
+        $this->trainerType = new Endpoint($this, StringEndpoint::class, null, 'trainer-types');
+        $this->suffix = new Endpoint($this, StringEndpoint::class, null, 'suffixes');
+        $this->stage = new Endpoint($this, StringEndpoint::class, null, 'stages');
+        $this->regulationMark = new Endpoint($this, StringEndpoint::class, null, 'regulation-marks');
+        $this->energyType = new Endpoint($this, StringEndpoint::class, null, 'energy-types');
+        $this->dexId = new Endpoint($this, StringEndpoint::class, null, 'dex-ids');
+        $this->type = new Endpoint($this, StringEndpoint::class, null, 'types');
+        $this->set = new SetEndpoint($this,);
+        $this->serie = new Endpoint($this, Serie::class, SerieResume::class, 'series');
+        $this->retreat = new Endpoint($this, StringEndpoint::class, null, 'retreats');
+        $this->rarity = new Endpoint($this, StringEndpoint::class, null, 'rarities');
+        $this->illustrator = new Endpoint($this, StringEndpoint::class, null, 'illustrators');
+        $this->hp = new Endpoint($this, StringEndpoint::class, null, 'hp');
+        $this->category = new Endpoint($this, StringEndpoint::class, null, 'categories');
     }
+
+
+    /**
+     * The card endpoint of the TCGdex API
+     * @var Endpoint<Card, CardResume> $card
+     */
+    public readonly Endpoint $card;
+
+    /**
+     * The variant endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $card
+     */
+    public readonly Endpoint $variant;
+
+    /**
+     * The trainerType endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $trainerType
+     */
+    public readonly Endpoint $trainerType;
+
+    /**
+     * The suffix endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $suffix
+     */
+    public readonly Endpoint $suffix;
+
+    /**
+     * The stage endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $stage
+     */
+    public readonly Endpoint $stage;
+
+    /**
+     * The regulationMark endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $regulationMark
+     */
+    public readonly Endpoint $regulationMark;
+
+    /**
+     * The energyType endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $energyType
+     */
+    public readonly Endpoint $energyType;
+
+    /**
+     * The dexId endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $dexId
+     */
+    public readonly Endpoint $dexId;
+
+    /**
+     * The type endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $type
+     */
+    public readonly Endpoint $type;
+
+    /**
+     * The set endpoint of the TCGdex API
+     */
+    public readonly SetEndpoint $set;
+
+    /**
+     * The serie endpoint of the TCGdex API
+     * @var Endpoint<Serie, SerieResume> $serie
+     */
+    public readonly Endpoint $serie;
+
+    /**
+     * The retreat endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $retreat
+     */
+    public readonly Endpoint $retreat;
+
+    /**
+     * The rarity endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $rarity
+     */
+    public readonly Endpoint $rarity;
+
+    /**
+     * The illustrator endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $illustrator
+     */
+    public readonly Endpoint $illustrator;
+
+    /**
+     * The hp endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $hp
+     */
+    public readonly Endpoint $hp;
+
+    /**
+     * The category endpoint of the TCGdex API
+     * @var Endpoint<StringEndpoint, string> $category
+     */
+    public readonly Endpoint $category;
 
     /**
      * @param string|null $endpoint
@@ -112,324 +219,275 @@ class TCGdex
     }
 
     /**
-     * Fetch a card by its ID or local id if the set is named
-     * @param String $id
-     * @param String|null $set
-     * @return Card|null
+     * same as `$tcgdex->fetch` but it allows to add params to the URL
+     * @param Array<string> $endpoint the endpoint paths as an array
+     * @param array $params the list of parameters to add
+     */
+    public function fetchWithParams(array $endpoint, array $params = null)
+    {
+        return Request::fetchWithParams(
+            Request::makePath(TCGdex::BASE_URI, $this->lang, ...$endpoint),
+            $params
+        );
+    }
+
+    /**
+     * @deprecated 2.2.0 use `$this->set->getCard($set, $id);` or `$this->card->get($id);` instead.
      */
     public function fetchCard(string $id, ?string $set = null)
     {
-        if (is_null($set)) {
-            $data = $this->fetch('cards', $id);
-        } else {
-            $data = $this->fetch('sets', $set, $id);
+        if (!is_null($set)) {
+            return $this->set->getCard($set, $id);
         }
-        if (is_null($data)) {
-            return null;
-        }
-        return Model::build(new Card($this), $data);
+        return $this->card->get($id);
     }
 
     /**
-     * @return CardResume[]|null
+     * @deprecated 2.2.0 use `$tcgdex->card->list();` instead.
      */
     public function fetchCards()
     {
-        $data = $this->fetch("cards");
-        if (is_null($data)) {
-            return null;
-        }
-        $arr = array();
-        foreach ($data as $item) {
-            array_push($arr, Model::build(new CardResume($this), $item));
-        }
-        return $arr;
+        return $this->card->list();
     }
 
     /**
-     * @param string $category
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->category->get($category);` instead.
      */
     public function fetchCategory(string $category)
     {
-        $data = $this->fetch("categories", $category);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->category->get($category);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->category->list();` instead.
      */
     public function fetchCategories()
     {
-        return $this->fetch("categories");
+        return $this->category->list();
     }
 
     /**
-     * @param string $hp
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->hp->get($hp);` instead.
      */
     public function fetchHp(string $hp)
     {
-        $data = $this->fetch("hp", $hp);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->hp->get($hp);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->hp->list();` instead.
      */
     public function fetchHps()
     {
-        return $this->fetch("hp");
+        return $this->hp->list();
     }
 
 
     /**
-     * @param string $illustrator
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->illustrator->get($illustrator);` instead.
      */
     public function fetchIllustrator(string $illustrator)
     {
-        $data = $this->fetch("illustrators", $illustrator);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->illustrator->get($illustrator);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->illustrator->list();` instead.
      */
     public function fetchIllustrators()
     {
-        return $this->fetch("illustrators");
+        return $this->illustrator->list();
     }
 
     /**
-     * @param string $rarity
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->rarity->get($rarity);` instead.
      */
     public function fetchRarity(string $rarity)
     {
-        $data = $this->fetch("rarities", $rarity);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->rarity->get($rarity);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->rarity->list();` instead.
      */
     public function fetchRarities()
     {
-        return $this->fetch("rarities");
+        return $this->rarity->list();
     }
 
     /**
-     * @param string $retreat
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->retreat->get($retreat);` instead.
      */
     public function fetchRetreat(string $retreat)
     {
-        $data = $this->fetch("retreats", $retreat);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->retreat->get($retreat);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->retreat->list();` instead.
      */
     public function fetchRetreats()
     {
-        return $this->fetch("retreats");
+        return $this->retreat->list();
     }
 
     /**
-     * @param string $serie
-     * @return Serie|null
+     * @deprecated 2.2.0 use `$tcgdex->serie->get($serie);` instead.
      */
     public function fetchSerie(string $serie)
     {
-        $data = $this->fetch("series", $serie);
-        return Model::build(new Serie($this), $data);
+        return $this->serie->get($serie);
     }
 
     /**
-     * @return SerieResume[]|null
+     * @deprecated 2.2.0 use `$tcgdex->serie->list();` instead.
      */
     public function fetchSeries()
     {
-        $data = $this->fetch("series");
-        if (is_null($data)) {
-            return null;
-        }
-        $arr = array();
-        foreach ($data as $item) {
-            array_push($arr, Model::build(new SerieResume($this), $item));
-        }
-        return $arr;
+        return $this->serie->list();
     }
 
         /**
-     * @param string $set
-     * @return Set|null
+         * @deprecated 2.2.0 use `$tcgdext->get($set);` instead.
      */
     public function fetchSet(string $set)
     {
-        $data = $this->fetch("sets", $set);
-        return Model::build(new Set($this), $data);
+        return $this->set->get($set);
     }
 
     /**
-     * @return SetResume[]|null
+     * @deprecated 2.2.0 use `$tcgdex->set->list();` instead.
      */
     public function fetchSets()
     {
-        $data = $this->fetch("sets");
-        if (is_null($data)) {
-            return null;
-        }
-        $arr = array();
-        foreach ($data as $item) {
-            array_push($arr, Model::build(new SetResume($this), $item));
-        }
-        return $arr;
+        return $this->set->list();
     }
 
     /**
-     * @param string $type
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->type->get($type);` instead.
      */
     public function fetchType(string $type)
     {
-        $data = $this->fetch("types", $type);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->type->get($type);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->type->list();` instead.
      */
     public function fetchTypes()
     {
-        return $this->fetch("types");
+        return $this->type->list();
     }
 
     /**
-     * @param string $dexId
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->dexId->get($dexId);` instead.
      */
     public function fetchDexId(string $dexId)
     {
-        $data = $this->fetch("dex-ids", $dexId);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->dexId->get($dexId);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->dexId->list();` instead.
      */
     public function fetchDexIds()
     {
-        return $this->fetch("dex-ids");
+        return $this->dexId->list();
     }
 
     /**
-     * @param string $energyType
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->energyType->get($energyType);` instead.
      */
     public function fetchEnergyType(string $energyType)
     {
-        $data = $this->fetch("energy-types", $energyType);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->energyType->get($energyType);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->energyType->list();` instead.
      */
     public function fetchEnergyTypes()
     {
-        return $this->fetch("energy-types");
+        return $this->energyType->list();
     }
 
     /**
-     * @param string $regulationMark
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->regulationMark->get($regulationMark);` instead.
      */
     public function fetchRegulationMark(string $regulationMark)
     {
-        $data = $this->fetch("regulation-marks", $regulationMark);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->regulationMark->get($regulationMark);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->regulationMark->list();` instead.
      */
     public function fetchRegulationMarks()
     {
-        return $this->fetch("regulation-marks");
+        return $this->regulationMark->list();
     }
 
     /**
-     * @param string $stage
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->stage->get($stage);` instead.
      */
     public function fetchStage(string $stage)
     {
-        $data = $this->fetch("stages", $stage);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->stage->get($stage);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->stage->list();` instead.
      */
     public function fetchStages()
     {
-        return $this->fetch("stages");
+        return $this->stage->list();
     }
 
     /**
-     * @param string $suffix
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->suffix->get($suffix);` instead.
      */
     public function fetchSuffix(string $suffix)
     {
-        $data = $this->fetch("suffixes", $suffix);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->suffix->get($suffix);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->suffix->list();` instead.
      */
     public function fetchSuffixes()
     {
-        return $this->fetch("suffixes");
+        return $this->suffix->list();
     }
 
     /**
-     * @param string $trainerType
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->trainerType->get($trainerType);` instead.
      */
     public function fetchTrainerType(string $trainerType)
     {
-        $data = $this->fetch("trainer-types", $trainerType);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->trainerType->get($trainerType);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->trainerType->list();` instead.
      */
     public function fetchTrainerTypes()
     {
-        return $this->fetch("trainer-types");
+        return $this->trainerType->list();
     }
 
     /**
-     * @param string $variant
-     * @return StringEndpoint|null
+     * @deprecated 2.2.0 use `$tcgdex->variant->get($variant);` instead.
      */
     public function fetchVariant(string $variant)
     {
-        $data = $this->fetch("variants", $variant);
-        return Model::build(new StringEndpoint($this), $data);
+        return $this->variant->get($variant);
     }
 
     /**
-     * @return string[]
+     * @deprecated 2.2.0 use `$tcgdex->variant->list();` instead.
      */
     public function fetchVariants()
     {
-        return $this->fetch("variants");
+        return $this->variant->list();
     }
 }

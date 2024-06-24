@@ -18,9 +18,10 @@ abstract class Model
     }
 
     /**
-     * @param Model $model
+     * @template T
+     * @param T $model
      * @param object|null $data
-     * @return mixed
+     * @return T
      */
     public static function build($model, $data)
     {

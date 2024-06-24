@@ -180,9 +180,4 @@ class Card extends CardResume
      * @var Legal
      */
     public $legal;
-
-    /**
-     * @var null
-     */
-    public $fetchFullCard = null;
 }
