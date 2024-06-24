@@ -21,7 +21,8 @@ class Endpoint
         protected readonly string $itemModel,
         protected readonly string|null $listModel,
         protected readonly string $endpoint
-     ) {}
+    )
+    {}
 
      /**
       * @return Item

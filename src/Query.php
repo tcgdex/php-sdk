@@ -2,7 +2,8 @@
 
 namespace TCGdex;
 
-class Query {
+class Query
+{
     public static function create()
     {
         return new Query();
