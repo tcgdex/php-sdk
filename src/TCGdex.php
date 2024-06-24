@@ -104,7 +104,7 @@ class TCGdex
         $this->energyType = new Endpoint($this, StringEndpoint::class, null, 'energy-types');
         $this->dexId = new Endpoint($this, StringEndpoint::class, null, 'dex-ids');
         $this->type = new Endpoint($this, StringEndpoint::class, null, 'types');
-        $this->set = new SetEndpoint($this,);
+        $this->set = new SetEndpoint($this);
         $this->serie = new Endpoint($this, Serie::class, SerieResume::class, 'series');
         $this->retreat = new Endpoint($this, StringEndpoint::class, null, 'retreats');
         $this->rarity = new Endpoint($this, StringEndpoint::class, null, 'rarities');
