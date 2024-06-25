@@ -229,7 +229,7 @@ class TCGdex
     /**
      * same as `$tcgdex->fetch` but it allows to add params to the URL
      * @param Array<string> $endpoint the endpoint paths as an array
-     * @param array $params the list of parameters to add
+     * @param Array<string> $params the list of parameters to add
      * @return mixed|null
      */
     public function fetchWithParams(array $endpoint, array $params = null)
@@ -256,12 +256,13 @@ class TCGdex
     }
 
     /**
-     * @return CardResume[]|null
+     * @return Array<CardResume>
      * @deprecated 2.2.0 use `$tcgdex->card->list();` instead.
      */
     public function fetchCards()
     {
-        return $this->card->list();
+        $res = $this->card->list();
+        return $res;
     }
 
     /**
