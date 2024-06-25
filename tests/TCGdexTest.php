@@ -6,15 +6,16 @@ namespace Tests;
 
 use TCGdex\TCGdex;
 use PHPUnit\Framework\TestCase;
+use TCGdex\Query;
 
-final class StackTest extends TestCase
+final class TCGdexTest extends TestCase
 {
 
     public function testCanRequest(): void
     {
         TCGdex::$client = new Psr18Mock("{\"ok\": true}");
         $tcgdex = new TCGdex("en");
-        $card = $tcgdex->fetchCard('testCanRequest');
+        $card = $tcgdex->card->get('testCanRequest');
         $this->assertNotEmpty($card);
     }
 
@@ -22,7 +23,7 @@ final class StackTest extends TestCase
     {
         TCGdex::$client = new Psr18Mock("{\"ok\": true}", 404);
         $tcgdex = new TCGdex("en");
-        $card = $tcgdex->fetchCard('test404Error');
+        $card = $tcgdex->card->get('test404Error');
         $this->assertEmpty($card);
     }
 
@@ -30,10 +31,10 @@ final class StackTest extends TestCase
     {
         TCGdex::$client = new Psr18Mock("{\"id\": \"1\"}");
         $tcgdex = new TCGdex("en");
-        $card1 = $tcgdex->fetchCard('testCache');
+        $card1 = $tcgdex->card->get('testCache');
         $this->assertEquals($card1->id, "1");
         TCGdex::$client = new Psr18Mock("{\"id\": \"2\"}");
-        $card2 = $tcgdex->fetchCard('testCache');
+        $card2 = $tcgdex->card->get('testCache');
         $this->assertEquals($card2->id, "1");
     }
 
@@ -41,49 +42,34 @@ final class StackTest extends TestCase
     {
         TCGdex::$client = null;
         $tcgdex = new TCGdex("en");
+
         $endpoints = array(
-            array('fetchCard', array('swsh3-136')),
-            array('fetchCard', array('136', 'swsh3')),
-
-            array('fetchCards', array('swsh3')),
-            array('fetchCards', array()),
-            array('fetchSet', array('swsh3')),
-            array('fetchSets', array('swsh3')),
-            array('fetchSets', array('swsh')),
-            array('fetchSeries', array()),
-            array('fetchSerie', array('swsh')),
-            array('fetchType', array('Colorless')),
-
-            array('fetchTypes', array()),
-            array('fetchRetreat', array('1')),
-            array('fetchRetreats', array()),
-            array('fetchRarity', array('Uncommon')),
-            array('fetchRarities', array()),
-            array('fetchIllustrator', array('tetsuya koizumi')),
-            array('fetchIllustrators', array()),
-            array('fetchHp', array('110')),
-            array('fetchHps', array()),
-            array('fetchCategory', array('Pokemon')),
-            array('fetchCategories', array()),
-
-            array('fetchDexId', array('162')),
-            array('fetchDexIds', array()),
-            array('fetchEnergyType', array('Special')),
-            array('fetchEnergyTypes', array()),
-            array('fetchRegulationMark', array('D')),
-            array('fetchRegulationMarks', array()),
-            array('fetchStage', array('Basic')),
-            array('fetchStages', array()),
-
-            array('fetchSuffix', array('EX')),
-            array('fetchSuffixes', array()),
-            array('fetchTrainerType', array('Tool')),
-            array('fetchTrainerTypes', array()),
-            array('fetchVariant', array('holo')),
-            array('fetchVariants', array()),
+            $tcgdex->card,
+            $tcgdex->variant,
+            $tcgdex->trainerType,
+            $tcgdex->suffix,
+            $tcgdex->stage,
+            $tcgdex->regulationMark,
+            $tcgdex->energyType,
+            $tcgdex->dexId,
+            $tcgdex->type,
+            $tcgdex->set,
+            $tcgdex->serie,
+            $tcgdex->retreat,
+            $tcgdex->rarity,
+            $tcgdex->illustrator,
+            $tcgdex->hp,
+            $tcgdex->category,
         );
         foreach ($endpoints as $item) {
-            $this->assertNotEmpty($tcgdex->{$item[0]}(...$item[1]));
+            $list = $item->list();
+            $this->assertNotEmpty($list);
+            $first = $list[0];
+            if (gettype($first) === "string" || gettype($first) === "integer") {
+                $this->assertNotEmpty($item->get($first));
+            } else {
+                $this->assertNotEmpty($item->get($first->id));
+            }
         }
     }
 
@@ -91,16 +77,17 @@ final class StackTest extends TestCase
     {
         TCGdex::$client = null;
         $tcgdex = new TCGdex("en");
-        $cards = $tcgdex->fetchCards('swsh1');
+        $cards = $tcgdex->card->list(Query::create()
+        ->equal('name', 'Furret'));
         $this->assertNotEmpty($cards);
-        $this->assertNotEmpty($cards[0]->fetchFullCard());
+        $this->assertNotEmpty($cards[0]->toCard());
     }
 
     public function testFetchFullSerieFromResume(): void
     {
         TCGdex::$client = null;
         $tcgdex = new TCGdex("en");
-        $series = $tcgdex->fetchSeries();
+        $series = $tcgdex->serie->list();
         $this->assertNotEmpty($series);
         $this->assertNotEmpty($series[0]->fetchFullSerie());
     }

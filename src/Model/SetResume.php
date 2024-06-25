@@ -41,4 +41,12 @@ class SetResume extends Model
             }
         }
     }
+
+    /**
+     * @return Set
+     */
+    public function toSet(): Set
+    {
+        return $this->sdk->set->get($this->id);
+    }
 }
