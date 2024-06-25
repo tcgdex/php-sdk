@@ -390,7 +390,7 @@ class TCGdex
     }
 
     /**
-     * @return SetResume[]|null
+     * @return SetResume[]
      * @deprecated 2.2.0 use `$tcgdex->set->list();` instead.
      */
     public function fetchSets()
