@@ -4,23 +4,11 @@ namespace TCGdex\Model\SubModel;
 
 class CardCount extends CardCountResume
 {
-    /**
-     * @var int
-     */
-    public $normal;
+    public int $normal = 0;
 
-    /**
-     * @var int
-     */
-    public $reverse;
+    public int $reverse = 0;
 
-    /**
-     * @var int
-     */
-    public $holo;
+    public int $holo = 0;
 
-    /**
-     * @var int|null
-     */
-    public $firstEd;
+    public ?int $firstEd = null;
 }
