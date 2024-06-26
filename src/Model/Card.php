@@ -56,49 +56,29 @@ class Card extends CardResume
         }
     }
 
-    /**
-     * @var string|null
-     */
-    public $illustrator;
+    public ?string $illustrator = null;
+
+    public string $rarity = '';
+
+    public string $category = '';
+
+    public Variants $variants;
+
+    public SetResume $set;
 
     /**
-     * @var string
+     * @var int[]
      */
-    public $rarity;
+    public ?array $dexId = null;
+
+    public ?int $hp = null;
 
     /**
-     * @var string
+     * @var string[]
      */
-    public $category;
+    public ?array $types = null;
 
-    /**
-     * @var Variants
-     */
-    public $variants;
-
-    /**
-     * @var SetResume
-     */
-    public $set;
-
-    /**
-     * @var int[]|null
-     */
-    public $dexId;
-
-    /**
-     * @var int|null
-     */
-    public $hp;
-    /**
-     * @var string[]|null
-     */
-    public $types;
-
-    /**
-     * @var string|null
-     */
-    public $evolveFrom;
+    public ?string $evolveFrom = null;
 
     /**
      * Temporarly not implemented due to #28
@@ -106,78 +86,45 @@ class Card extends CardResume
     // public $weight;
     // public $height;
 
-    /**
-     * @var string|null
-     */
-    public $description;
+    public ?string $description = null;
 
-    /**
-     * @var string|int|null
-     */
-    public $level;
+    public string|int|null $level = null;
 
-    /**
-     * @var string|null
-     */
-    public $stage;
+    public ?string $stage = null;
 
-    /**
-     * @var string|null
-     */
-    public $suffix;
+    public ?string $suffix = null;
 
-    /**
-     * @var Item|null
-     */
-    public $item;
+    public ?Item $item = null;
 
     /**
      * @var Ability[]
      */
-    public $abilities;
+    public array $abilities = [];
 
     /**
      * @var Attack[]
      */
-    public $attacks;
+    public array $attacks = [];
 
     /**
      * @var WeakRes[]
      */
-    public $weaknesses;
+    public array $weaknesses = [];
 
     /**
      * @var WeakRes[]
      */
-    public $resistances;
+    public array $resistances = [];
 
-    /**
-     * @var int|null
-     */
-    public $retreat;
+    public ?int $retreat = null;
 
-    /**
-     * @var string|null
-     */
-    public $effect;
+    public ?string $effect = null;
 
-    /**
-     * @var string|null
-     */
-    public $trainerType;
+    public ?string $trainerType = null;
 
-    /**
-     * @var string|null
-     */
-    public $energyType;
+    public ?string $energyType = null;
 
-    /**
-     * @var string|null
-     */
-    public $regulationMark;
+    public ?string $regulationMark = null;
 
-    /**
-     * @var Legal
-     */
-    public $legal;
+    public Legal $legal;
 }
