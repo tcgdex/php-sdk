@@ -7,7 +7,7 @@ class Serie extends SerieResume
     /**
      * @var SetResume[]
      */
-    public $sets;
+    public array $sets = [];
 
     protected function fill(object $data): void
     {
