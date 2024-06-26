@@ -8,31 +8,15 @@ use TCGdex\Model\SubModel\Legal;
 
 class Set extends SetResume
 {
-    /**
-     * @var SerieResume
-     */
-    public $serie;
+    public SerieResume $serie;
 
-    /**
-     * @var string|null
-     */
-    public $tcgOnline;
+    public ?string $tcgOnline = null;
 
+    public ?Variants $variants = null;
 
-    /**
-     * @var Variants|null
-     */
-    public $variants;
+    public string $releaseDate = '';
 
-    /**
-     * @var string
-     */
-    public $releaseDate;
-
-    /**
-     * @var Legal
-     */
-    public $legal;
+    public Legal $legal;
 
     /**
      * @var CardCount
@@ -42,7 +26,7 @@ class Set extends SetResume
     /**
      * @var CardResume[]
      */
-    public $cards;
+    public array $cards = [];
 
     protected function fill(object $data): void
     {
