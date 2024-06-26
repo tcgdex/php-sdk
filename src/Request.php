@@ -32,7 +32,6 @@ class Request
         }
         $cacheKey = preg_replace("/[\{\}\(\)\/\\\@\:]/", '', $url);
 
-        var_dump($url);
         // fetch from the cache the response
         $response = TCGdex::$cache->get($cacheKey, null);
 
