@@ -6,13 +6,7 @@ use TCGdex\Model\Model;
 
 class Legal extends Model
 {
-    /**
-     * @var bool
-     */
-    public $standard;
+    public bool $standard;
 
-    /**
-     * @var bool
-     */
-    public $expanded;
+    public bool $expanded;
 }
