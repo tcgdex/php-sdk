@@ -4,6 +4,13 @@ namespace TCGdex\Model;
 
 class StringEndpoint extends Model
 {
+    public string $name = '';
+
+    /**
+     * @var CardResume[]
+     */
+    public array $cards = [];
+
     protected function fill(object $data): void
     {
         foreach ($data as $key => $value) {
@@ -16,14 +23,4 @@ class StringEndpoint extends Model
             }
         }
     }
-
-    /**
-     * @var string
-     */
-    public $name;
-
-    /**
-     * @var \TCGdex\Model\CardResume[]
-     */
-    public $cards;
 }

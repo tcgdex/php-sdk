@@ -6,23 +6,13 @@ use TCGdex\Model\Model;
 
 class Variants extends Model
 {
-    /**
-     * @var string|null
-     */
-    public $normal;
+    public ?bool $normal = null;
 
-    /**
-     * @var string|null
-     */
-    public $reverse;
+    public ?bool $reverse = null;
 
-    /**
-     * @var string|null
-     */
-    public $holo;
+    public ?bool $holo = null;
 
-    /**
-     * @var string|null
-     */
-    public $firstEdition;
+    public ?bool $firstEdition = null;
+
+    public ?bool $wPromo = null;
 }

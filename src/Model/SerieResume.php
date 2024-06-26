@@ -4,20 +4,11 @@ namespace TCGdex\Model;
 
 class SerieResume extends Model
 {
-    /**
-     * @var string
-     */
-    public $id;
+    public string $id = '';
 
-    /**
-     * @var string
-     */
-    public $name;
+    public string $name = '';
 
-    /**
-     * @var string|null
-     */
-    public $logo;
+    public ?string $logo = null;
 
     /**
      * @deprecated 2.2.0 use `toSerie()` instead
@@ -27,9 +18,6 @@ class SerieResume extends Model
         return $this->toSerie();
     }
 
-    /**
-     * @return Serie
-     */
     public function toSerie(): Serie
     {
         return $this->sdk->serie->get($this->id);

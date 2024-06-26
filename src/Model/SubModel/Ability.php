@@ -6,18 +6,9 @@ use TCGdex\Model\Model;
 
 class Ability extends Model
 {
-    /**
-     * @var string
-     */
-    public $type;
+    public string $type = '';
 
-    /**
-     * @var string
-     */
-    public $name;
+    public string $name = '';
 
-    /**
-     * @var string
-     */
-    public $effect;
+    public string $effect = '';
 }

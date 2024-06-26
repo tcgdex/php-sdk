@@ -6,25 +6,13 @@ use TCGdex\Model\SubModel\CardCountResume;
 
 class SetResume extends Model
 {
-    /**
-     * @var string
-     */
-    public $id;
+    public string $id = '';
 
-    /**
-     * @var string
-     */
-    public $name;
+    public string $name = '';
 
-    /**
-     * @var string|null
-     */
-    public $logo;
+    public ?string $logo = null;
 
-    /**
-     * @var string|null
-     */
-    public $symbol;
+    public ?string $symbol = null;
 
     /**
      * @var CardCountResume
@@ -42,9 +30,6 @@ class SetResume extends Model
         }
     }
 
-    /**
-     * @return Set
-     */
     public function toSet(): Set
     {
         return $this->sdk->set->get($this->id);

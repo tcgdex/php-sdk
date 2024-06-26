@@ -2,17 +2,13 @@
 
 namespace TCGdex\Model;
 
+use TCGdex\TCGdex;
+
 abstract class Model
 {
-    /**
-     * @var \TCGdex\TCGdex
-     */
-    protected $sdk;
+    protected TCGdex $sdk;
 
-    /**
-     * @param \TCGdex\TCGdex $sdk
-     */
-    public function __construct(&$sdk)
+    public function __construct(TCGdex $sdk)
     {
         $this->sdk = $sdk;
     }

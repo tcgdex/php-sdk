@@ -6,13 +6,7 @@ use TCGdex\Model\Model;
 
 class CardCountResume extends Model
 {
-    /**
-     * @var int
-     */
-    public $total;
+    public int $total = 0;
 
-    /**
-     * @var int
-     */
-    public $official;
+    public int $official = 0;
 }
