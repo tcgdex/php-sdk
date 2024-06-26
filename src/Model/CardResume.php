@@ -4,25 +4,13 @@ namespace TCGdex\Model;
 
 class CardResume extends Model
 {
-    /**
-     * @var string
-     */
-    public $id;
+    public string $id = '';
 
-    /**
-     * @var string
-     */
-    public $localId;
+    public string $localId = '';
 
-    /**
-     * @var string
-     */
-    public $name;
+    public string $name = '';
 
-    /**
-     * @var string|null
-     */
-    public $image;
+    public ?string $image = null;
 
     /**
      * @deprecated 2.2.0 use `toCard()` instead
