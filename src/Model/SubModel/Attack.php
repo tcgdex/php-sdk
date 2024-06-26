@@ -7,22 +7,13 @@ use TCGdex\Model\Model;
 class Attack extends Model
 {
     /**
-     * @var string[]|null
+     * @var string[]
      */
-    public $cost;
+    public ?array $cost = null;
 
-    /**
-     * @var string
-     */
-    public $name;
+    public string $name = '';
 
-    /**
-     * @var string|null
-     */
-    public $effect;
+    public ?string $effect = null;
 
-    /**
-     * @var string|int|null
-     */
-    public $damage;
+    public string|int|null $damage = null;
 }
