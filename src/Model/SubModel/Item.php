@@ -6,13 +6,7 @@ use TCGdex\Model\Model;
 
 class Item extends Model
 {
-    /**
-     * @var string
-     */
-    public $name;
+    public string $name = '';
 
-    /**
-     * @var string
-     */
-    public $effect;
+    public string $effect = '';
 }
