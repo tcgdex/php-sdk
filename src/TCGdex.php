@@ -77,10 +77,7 @@ class TCGdex
      */
     public $lang = "en";
 
-    /**
-     * @param String|null $lang
-     */
-    public function __construct($lang = null)
+    public function __construct(?string $lang = null)
     {
         if (is_null(TCGdex::$cache)) {
             // no PSR16 implementation found, try loading the base one
@@ -232,7 +229,7 @@ class TCGdex
      * @param Array<string> $params the list of parameters to add
      * @return mixed|null
      */
-    public function fetchWithParams(array $endpoint, array $params = null)
+    public function fetchWithParams(array $endpoint, ?array $params = null)
     {
         return Request::fetchWithParams(
             Request::makePath(TCGdex::BASE_URI, $this->lang, ...$endpoint),
