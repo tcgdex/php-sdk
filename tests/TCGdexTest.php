@@ -32,10 +32,10 @@ final class TCGdexTest extends TestCase
         TCGdex::$client = new Psr18Mock("{\"id\": \"1\"}");
         $tcgdex = new TCGdex("en");
         $card1 = $tcgdex->card->get('testCache');
-        $this->assertEquals($card1->id, "1");
+        $this->assertEquals("1", $card1->id);
         TCGdex::$client = new Psr18Mock("{\"id\": \"2\"}");
         $card2 = $tcgdex->card->get('testCache');
-        $this->assertEquals($card2->id, "1");
+        $this->assertEquals("1", $card2->id);
     }
 
     public function testRealEndpoints(): void
@@ -98,6 +98,6 @@ final class TCGdexTest extends TestCase
         $tcgdex = new TCGdex("en");
         $series = $tcgdex->serie->list();
         $this->assertNotEmpty($series);
-        $this->assertNotEmpty($series[0]->fetchFullSerie());
+        $this->assertNotEmpty($series[0]->toSerie());
     }
 }
