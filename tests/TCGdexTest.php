@@ -73,6 +73,15 @@ final class TCGdexTest extends TestCase
         }
     }
 
+    public function testUnknownCard(): void
+    {
+        TCGdex::$client = null;
+        $tcgdex = new TCGdex("en");
+        $card = $tcgdex->set->getCard('unknownSet', 'unknownCard');
+
+        $this->assertNull($card);
+    }
+
     public function testFetchFullCardFromResume(): void
     {
         TCGdex::$client = null;
