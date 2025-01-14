@@ -33,7 +33,5 @@
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
-
     <logging />
-
 </phpunit>
