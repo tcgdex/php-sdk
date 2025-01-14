@@ -127,4 +127,6 @@ class Card extends CardResume
     public ?string $regulationMark = null;
 
     public Legal $legal;
+
+    public ?string $updated = null;
 }

@@ -22,7 +22,7 @@ class Request
      * @param string $url
      * @param Array<string, string> $params
      */
-    public static function fetchWithParams(string $url, array $params = null): mixed
+    public static function fetchWithParams(string $url, ?array $params = null): mixed
     {
         if (!is_null($params)) {
             $mapped = array_map(function (string $key, string $value) {

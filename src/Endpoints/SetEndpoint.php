@@ -24,7 +24,7 @@ class SetEndpoint extends Endpoint
         );
     }
 
-    public function getCard(string $set, string $localId): Card
+    public function getCard(string $set, string $localId): ?Card
     {
         $res = $this->tcgdex->fetch($this->endpoint, $set, $localId);
         return Model::build(new Card($this->tcgdex), $res);

@@ -36,7 +36,7 @@ class Endpoint
      /**
       * @return Array<List>
       */
-    public function list(Query $query = null): array
+    public function list(?Query $query = null): array
     {
         $res = $this->tcgdex->fetchWithParams([$this->endpoint], is_null($query) ? null : $query->params);
         if (is_null($this->listModel)) {
