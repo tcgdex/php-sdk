@@ -1,0 +1,9 @@
+# Command to run from the project root :
+# docker-compose -f .docker/docker-compose.yml run --build dev /bin/bash
+services:
+  dev:
+    build: .
+    stdin_open: true
+    tty: true
+    volumes:
+      - ..:/usr/src/app
