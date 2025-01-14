@@ -6,7 +6,6 @@ use TCGdex\Model\Model;
 
 class CardCountResume extends Model
 {
-
     /**
      * total of number of cards
      */

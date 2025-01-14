@@ -6,6 +6,7 @@ use TCGdex\Model\SubModel\CardCount;
 use TCGdex\Model\SubModel\Variants;
 use TCGdex\Model\SubModel\Legal;
 use TCGdex\Model\SubModel\Abbreviation;
+
 class Set extends SetResume
 {
     /**
