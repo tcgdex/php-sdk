@@ -25,11 +25,17 @@ class Endpoint
     }
 
      /**
-      * @return Item
+      * @return Item|null
       */
     public function get(string|int $id)
     {
         $res = $this->tcgdex->fetch($this->endpoint, $id);
+
+        // handle case where result is not defined or an error
+        if (is_null($res)) {
+            return null;
+        }
+
         return Model::build(new $this->itemModel($this->tcgdex), $res);
     }
 

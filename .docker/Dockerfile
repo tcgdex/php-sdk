@@ -1,4 +1,4 @@
-FROM php:8.1
+FROM php:8.4
 
 WORKDIR /usr/src/app
 
@@ -15,7 +15,7 @@ RUN apt-get update \
 #     && docker-php-ext-install pdo mysqli pdo_mysql zip intl gd
 
 # Copy the PHP config
-# COPY php.ini /usr/local/etc/php/php.ini
+COPY php.ini /usr/local/etc/php/php.ini
 
 # Copy composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer

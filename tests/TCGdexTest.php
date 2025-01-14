@@ -13,7 +13,7 @@ final class TCGdexTest extends TestCase
 
     public function testCanRequest(): void
     {
-        TCGdex::$client = new Psr18Mock("{\"ok\": true}");
+        TCGdex::$client = new Psr18Mock("{\"id\": \"swsh1-136\"}");
         $tcgdex = new TCGdex("en");
         $card = $tcgdex->card->get('testCanRequest');
         $this->assertNotEmpty($card);
