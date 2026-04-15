@@ -12,6 +12,11 @@ class Serie extends SerieResume
     public ?SetResume $firstSet = null;
     public ?SetResume $lastSet = null;
 
+    /**
+     * the serie release date as an ISO8601 string (ex: `2020-02-01`)
+     */
+    public string $releaseDate = '';
+
     protected function fill(object $data): void
     {
         foreach ($data as $key => $value) {
