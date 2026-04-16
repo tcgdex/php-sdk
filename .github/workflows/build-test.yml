@@ -31,7 +31,7 @@ jobs:
       run: composer validate --strict
 
     - name: Install Composer dependencies
-      uses: ramsey/composer-install@v3
+      uses: ramsey/composer-install@v4
 
     - name: Run test suite
       run: composer run-script test
