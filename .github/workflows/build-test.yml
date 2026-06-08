@@ -36,7 +36,7 @@ jobs:
     - name: Run test suite
       run: composer run-script test
 
-    - uses: codecov/codecov-action@v6
+    - uses: codecov/codecov-action@v7
       if: matrix.php-versions == '8.1'
       with:
         # Comma-separated list of files to upload
